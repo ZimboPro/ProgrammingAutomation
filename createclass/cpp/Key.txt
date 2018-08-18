@@ -1,0 +1,5 @@
+{1} - Name
+{2} - Name in all caps
+{3} - Header file include path
+{4} - Base class
+{5} - Base header file include path
