@@ -1,0 +1,6 @@
+inheritance
+multiple inherintance
+save in specified locations
+link header file
+interface
+namespace

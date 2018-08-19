@@ -15,11 +15,11 @@
     this = src;
 }
 
-{1} & operator=(const {1} & src)
+{1} & {1}::operator=(const {1} & src)
 {
     if (this != &src)
     {
-        this = src;
+        *this = src;
     }
-    return this;
+    return *this;
 }

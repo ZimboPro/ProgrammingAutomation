@@ -12,14 +12,14 @@ Inherit::~Inherit()
 
 Inherit::Inherit(const Inherit & src)
 {
-    this = src;
+    *this = src;
 }
 
-Inherit & operator=(const Inherit & src)
+Inherit & Inherit::operator=(const Inherit & src)
 {
     if (this != &src)
     {
-        this = src;
+        *this = src;
     }
-    return this;
+    return *this;
 }
