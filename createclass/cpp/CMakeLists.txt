@@ -15,4 +15,5 @@ add_executable(
     src/Inherit.cpp
     src/Interface.cpp
     src/Standard.cpp
+    src/Parse.cpp
 )
