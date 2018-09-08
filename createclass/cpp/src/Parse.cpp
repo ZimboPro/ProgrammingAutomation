@@ -3,6 +3,9 @@
 #include <Enum.hpp>
 #include <iostream>
 #include <cstring>
+#include <File.hpp>
+
+#include <fmt/format.h>
 
 Parse::Parse()
 {
@@ -44,13 +47,20 @@ bool CheckForFlag(const char * str, Type & type)
     return true;
 }
 
-void Parse::parse(const char **commands, const int & count)
+void Parse::parse(char **commands, const int & count)
 {
     Type type = Type::File;
     for (int i = 1; i < count; i++)
     {
         if (CheckForFlag(commands[i], type))
             continue;
-        
+        Combination temp(commands[i], type);        
+        this->_flags.push_back(temp);
     }
+}
+
+void Parse::createClass()
+{
+    std::string header = File::Read(R"(../resources/HeaderTemplate.txt)");
+    std::string source = File::Read(R"(../resources/SourceTemplate.txt)");
 }
