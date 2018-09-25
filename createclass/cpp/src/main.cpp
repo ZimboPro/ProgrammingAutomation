@@ -15,7 +15,7 @@ int main(int ac, char **av)
     else
     {
         Parse p;
-        p.parse(av, ac);
+        p.parseArguments(av, ac);
     }
     return (0);
 }

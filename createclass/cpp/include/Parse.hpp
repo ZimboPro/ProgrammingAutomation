@@ -12,6 +12,15 @@ struct Combination
     Combination(char * str, Type t) : variable(str), type(t) {}
 };
 
+struct ParseStrings
+{
+    std::string _className;
+    std::string _classHeader;
+    std::string _classIncludePath;
+    std::vector<std::string> _baseClassName;
+    std::vector<std::string> _baseIncludePath;
+};
+
 class Parse
 {
     public:
@@ -20,11 +29,12 @@ class Parse
         Parse(const Parse & src);
 
         Parse & operator=(const Parse & src);
-        void parse(char **commands, const int & count);
-        void createClass();
+        void parseArguments(char **commands, const int & count);
 
     private:
+        void createClass();
         std::vector<Combination> _flags;
+        // ParseStrings _parsedVariables;
 };
 
 #endif

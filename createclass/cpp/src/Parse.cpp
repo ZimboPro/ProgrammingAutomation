@@ -31,23 +31,25 @@ Parse & Parse::operator=(const Parse & src)
     return *this;
 }
 
+void checkFlag(const char * str, Type & currentType, const char * flag, Type flagType)
+{
+    if (strcmp(str, flag) == 0)
+        currentType = flagType;
+}
+
 bool CheckForFlag(const char * str, Type & type)
 {
     Type temp = type;
-    if (strcmp(str,"-p") == 0)
-        type = Type::Location;
-    else if (strcmp(str,"-i") == 0)
-        type = Type::Inherit;
-    else if (strcmp(str,"-I") == 0)
-        type = Type::Interface;
-    else if (strcmp(str,"-n") == 0)
-        type = Type::Namespace;
+    checkFlag(str, type, "-p", Type::Location);
+    checkFlag(str, type, "-i", Type::Inherit);
+    checkFlag(str, type, "-I", Type::Interface);
+    checkFlag(str, type, "-n", Type::Namespace);
     if (temp == type)
         return false;
     return true;
 }
 
-void Parse::parse(char **commands, const int & count)
+void Parse::parseArguments(char **commands, const int & count)
 {
     Type type = Type::File;
     for (int i = 1; i < count; i++)
@@ -59,8 +61,42 @@ void Parse::parse(char **commands, const int & count)
     }
 }
 
+void appendVariable(std::string &variable, std::string & str)
+{
+    if (variable.length() == 0)
+        variable = str;
+    else
+        variable.append(" " + str);
+}
+
 void Parse::createClass()
 {
     std::string header = File::Read(R"(../resources/HeaderTemplate.txt)");
     std::string source = File::Read(R"(../resources/SourceTemplate.txt)");
+    for (size_t i = 0; i < this->_flags.size(); i++)
+    {
+        if (this->_flags[i].type == Type::File)
+        {
+            ParseStrings variables;
+            variables._className = this->_flags[i].variable;
+            for (size_t j = i + 1; j < this->_flags.size(); j++)
+            {   
+                switch (this->_flags[i].type)
+                {
+                    case Type::Location:
+                        break;
+                    case Type::Inherit:
+                        break;
+                    case Type::Interface:
+                        break;
+                    case Type::Namespace:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        else
+            break;
+    }
 }
